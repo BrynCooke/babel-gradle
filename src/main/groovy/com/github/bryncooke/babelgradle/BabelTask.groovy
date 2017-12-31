@@ -52,7 +52,7 @@ class BabelTask extends DefaultTask {
         //Process the files
         if (!filesToProcess.isEmpty()) {
             logging.captureStandardOutput(LogLevel.INFO)
-            def commandLine = ['npx', 'babel', *filesToProcess, '-d', outputDir.absoluteFile.path, '--presets=' + presets.join(',')]
+            def commandLine = ['npx', 'babel', *filesToProcess, '-d', outputDir.absoluteFile.path, '--presets=' + presets.join(','), '--source-maps']
             project.exec { e ->
                 e.workingDir inputDir
                 e.commandLine commandLine

@@ -1,5 +1,6 @@
 plugins {
-    id "com.github.bryncooke.babel-gradle" version "1.0.0"
+
+    id "com.github.bryncooke.babel-gradle" version "1.0.1"
 }
 
 // If java plugin is specified then babel task will automatically run before processResources and the output will be

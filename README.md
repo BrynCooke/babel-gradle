@@ -4,7 +4,7 @@ Add the plugin and specify the presets that you want to use. For example:
 
 ```
 plugins {
-    id 'com.github.bryncooke.babel-gradle' version '1.0.0'
+    id 'com.github.bryncooke.babel-gradle' version '1.0.1'
 }
 
 
@@ -13,6 +13,8 @@ babel {
 }
 
 ```
+
+Place your artifacts in `src/main/babel` for processing.
 
 If the processResources task is present then it will automatically depend on the babel task
 

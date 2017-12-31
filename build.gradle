@@ -1,9 +1,9 @@
 plugins {
     id 'com.gradle.plugin-publish' version '0.9.9'
 }
-group 'com.github.bryncooke'
+group 'com.github.bryncooke.babel-gradle'
 
-version '1.0.0'
+version '1.0.1'
 
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
@@ -34,7 +34,7 @@ pluginBundle {
             displayName = 'babel-gradle'
             description = 'Babel plugin for gradle'
             tags = ['babel', 'react']
-            version = '1.0.0'
+            version = project.version
         }
     }
 }
