@@ -7,6 +7,7 @@ import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
+import org.apache.tools.ant.taskdefs.condition.Os
 
 class BabelTask extends DefaultTask {
 
@@ -52,7 +53,16 @@ class BabelTask extends DefaultTask {
         //Process the files
         if (!filesToProcess.isEmpty()) {
             logging.captureStandardOutput(LogLevel.INFO)
-            def commandLine = ['npx', 'babel', *filesToProcess, '-d', outputDir.absoluteFile.path, '--presets=' + presets.join(','), '--source-maps']
+
+            // This is very strange, on Windows gradle can not find the npx executable, even if it is in the PATH.
+            // It can however, find the "cmd" executable, so we fix this by executing cmd which then again executes npx properly.
+            def commandLine
+            if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+                commandLine = ['cmd', '/C', 'npx', 'babel-cli', *filesToProcess, '-d', outputDir.absoluteFile.path, '--presets=' + presets.join(','), '--source-maps']
+            } else {
+                commandLine = ['npx', 'babel-cli', *filesToProcess, '-d', outputDir.absoluteFile.path, '--presets=' + presets.join(','), '--source-maps']
+            }
+
             project.exec { e ->
                 e.workingDir inputDir
                 e.commandLine commandLine
